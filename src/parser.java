@@ -5,19 +5,19 @@ public class parser{
     private String[] verbsPermesosItems = {"USAR", "DEIXAR", "AGAFAR"};
     private String[] verbsPermesosZones = {"ANAR"};
     private String[] verbsPermesosLlanterna = {"ENCENDRE", "APAGAR", "USAR", "DEIXAR", "AGAFAR"};
-    private String[] zonesPermeses = {"MENJADOR", "DORMITORI ADER", "DORMITORI ELSTER", "DORMITORI ROBERT", "NAVEGACIO", "BANYS", "INFERMERIA", "PASSADIS", "SISTEMES", "TALLER", "SORTIDA", "FORA"};
-    private String[] itemsPermesos = {"LLANTERNA", "PISTOLA", "VESTIT", "EINA", "DONUT", "XERINGA", "CLAU ELSTER", "CLAU ROBERT"};
+    private String[] zonesPermeses = {"MENJADOR", "D.ADER", "D.ELSTER", "D.ROBERT", "NAVEGACIO", "BANYS", "INFERMERIA", "PASSADIS", "SISTEMES", "TALLER", "SORTIDA", "FORA", "CUINA"};
+    private String[] itemsPermesos = {"LLANTERNA", "PISTOLA", "VESTIT", "EINA", "DONUT", "XERINGA", "C.ELSTER", "C.ROBERT"};
 
     private Scanner sc;
 
-    public parser() {
-        this.sc = new Scanner(System.in);
+    public parser(Scanner sc) {
+        this.sc = sc;
     }
 
     public String[] getComanda() {
         System.out.print("> ");
         String input = sc.nextLine().toUpperCase().trim();
-        String[] parts = input.split(" ", 2);
+        String[] parts = input.split("\\s+", 2);
 
         if (parts.length < 2) {
             System.out.println("Comanda invàlida. Si us plau, introdueix un verb i un objectiu.");

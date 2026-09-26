@@ -3,10 +3,10 @@ public class player {
     int statusInfeccio;
     boolean infectat;
     boolean mort;
-    room zonaActual;
+    String zonaActual;
     boolean teVestit;
 
-    public player(objecte[] inventari, int statusInfeccio, boolean infectat, boolean mort, room zonaActual, boolean teVestit){
+    public player(objecte[] inventari, int statusInfeccio, boolean infectat, boolean mort, String zonaActual, boolean teVestit){
         this.inventari = inventari;
         this.statusInfeccio = statusInfeccio;
         this.infectat = infectat;

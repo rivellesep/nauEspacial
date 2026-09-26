@@ -2,6 +2,8 @@ import java.util.Scanner;
 
 public class joc {
     static Scanner sc = new Scanner(System.in);
+    parser p = new parser(sc);
+
     //Mapa:
     // System.out.println("                             ┌──────────────────┐");
     // System.out.println("                             │ Dormitori Robert │");
@@ -34,36 +36,36 @@ public class joc {
     public static final String BLUE = "\u001B[34m";
     public static final String PURPURE = "\u001B[35m";
 
-    room cuina = new room(1, "Cuina", new int[]{9,2}, new objecte[]{}, new npc[]{});
-    room menjador = new room(2, "Menjador", new int[]{1,7,4,9,6}, new objecte[]{}, new npc[]{});
-    room dormitoriAder = new room(3, "Dormitori Ader", new int[]{6}, new objecte[]{}, new npc[]{});
-    room dormitoriElster = new room(4, "Dormitori Elster", new int[]{8,7,4}, new objecte[]{}, new npc[]{});
-    room dormitoriRobert = new room(5, "Dormitori Robert", new int[]{9}, new objecte[]{}, new npc[]{});
-    room navegacio = new room(6, "Navegacio", new int[]{3,2}, new objecte[]{}, new npc[]{});
-    room banys = new room(7, "Banys", new int[]{4,2}, new objecte[]{}, new npc[]{});
-    room infermeria = new room(8, "Infermeria", new int[]{4}, new objecte[]{}, new npc[]{});
-    room pasadis = new room(9, "Passadis", new int[]{5,1,2,11}, new objecte[]{}, new npc[]{});
-    room sistemas = new room(10, "Sistemas", new int[]{11}, new objecte[]{}, new npc[]{});
-    room taller = new room(11, "Taller", new int[]{10,12,9}, new objecte[]{}, new npc[]{});
-    room sortidaExterior = new room(12, "Sortida Exterior", new int[]{11,13}, new objecte[]{}, new npc[]{});
-    room fora = new room(13, "Fora", new int[]{12}, new objecte[]{}, new npc[]{});
+    room cuina = new room(1, "CUINA", new int[]{9,2}, new objecte[]{}, new npc[]{});
+    room menjador = new room(2, "MENJADOR", new int[]{1,7,4,9,6}, new objecte[]{}, new npc[]{});
+    room dAder = new room(3, "D.ADER", new int[]{6}, new objecte[]{}, new npc[]{});
+    room dElster = new room(4, "D.ELSTER", new int[]{8,7,4}, new objecte[]{}, new npc[]{});
+    room dRobert = new room(5, "D.ROBERT", new int[]{9}, new objecte[]{}, new npc[]{});
+    room navegacio = new room(6, "NAVEGACIO", new int[]{3,2}, new objecte[]{}, new npc[]{});
+    room banys = new room(7, "BANYS", new int[]{4,2}, new objecte[]{}, new npc[]{});
+    room infermeria = new room(8, "INFERMERIA", new int[]{4}, new objecte[]{}, new npc[]{});
+    room passadis = new room(9, "PASSADIS", new int[]{5,1,2,11}, new objecte[]{}, new npc[]{});
+    room sistemes = new room(10, "SISTEMES", new int[]{11}, new objecte[]{}, new npc[]{});
+    room taller = new room(11, "TALLER", new int[]{10,12,9}, new objecte[]{}, new npc[]{});
+    room sortida = new room(12, "SORTIDA EXTERIOR", new int[]{11,13}, new objecte[]{}, new npc[]{});
+    room fora = new room(13, "FORA", new int[]{12}, new objecte[]{}, new npc[]{});
 
     room[] mapaZones = new room[]{
         cuina, 
         menjador, 
-        dormitoriAder, 
-        dormitoriElster, 
-        dormitoriRobert, 
+        dAder, 
+        dElster, 
+        dRobert, 
         navegacio, banys, 
         infermeria, 
-        pasadis, 
-        sistemas, 
+        passadis, 
+        sistemes, 
         taller, 
-        sortidaExterior, 
+        sortida, 
         fora
     };
 
-    player jugador = new player(null, 0, false, false, dormitoriAder, false);
+    player jugador = new player(null, 0, false, false, "D.ADER", false);
 
     int contarTorns;
     boolean finalJoc;
@@ -149,8 +151,35 @@ public class joc {
 
     public void bucle(){
         do {
-            
-        } while (finalJoc);
+            String[] comanda;
+            System.out.println("Estas en la habitacio: " + jugador.zonaActual);
+            comanda = p.getComanda();
+            if (comanda[0].equals("ANAR")) {
+                boolean sortidesIguals = false;
+                for(int i = 0; i < mapaZones.length; i++){
+                    if (mapaZones[i].nom.equals(comanda[1])){
+                        room zonaI = mapaZones[i];
+                        for(int w = 0; w < mapaZones.length; w++){
+                            if (mapaZones[w].nom.equals(jugador.zonaActual)){
+                                room zonaW = mapaZones[w];
+                                for(int z = 0; z < zonaW.sortides.length; z++){
+                                    if(zonaW.sortides[z] == zonaI.identificador){
+                                        jugador.zonaActual = comanda[1];
+                                        sortidesIguals = true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if(sortidesIguals == true){
+                    System.out.println("Has anat a " + jugador.zonaActual);
+                } else{
+                    System.out.println("No pots anar a aquesta zona");
+                }
+            } 
+        } while (!(finalJoc));
     }
 
     public void comprovarFinal(){
