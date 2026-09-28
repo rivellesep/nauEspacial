@@ -2,5 +2,10 @@ public class objecte{
     int identificador;
     String nom;
     String descripcio;
-    boolean esAgafable;
+
+    public objecte(int identificador, String nom, String descripcio){
+        this.identificador = identificador;
+        this.nom = nom;
+        this.descripcio = descripcio;
+    }
 }

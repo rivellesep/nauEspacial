@@ -29,25 +29,38 @@ public class joc {
     public static final String CROSS = "\u001B[9m";
     public static final String SUB = "\u001B[4m";
     public static final String ITALICS = "\u001B[3m";
-    public static final String RED = "\u001B[31m";
-    public static final String GRAY = "\u001B[90m"; // 30m es negre, 90m es gris de veritat
-    public static final String YELLOW = "\u001B[33m";
-    public static final String GREEN = "\u001B[32m";
-    public static final String BLUE = "\u001B[34m";
-    public static final String PURPURE = "\u001B[35m";
+    public static final String RED = "\u001B[31m"; //Elster
+    public static final String GRAY = "\u001B[90m"; // Subtitols
+    public static final String YELLOW = "\u001B[33m"; //iHall
+    public static final String GREEN = "\u001B[32m"; //Objectes
+    public static final String BLUE = "\u001B[34m"; //Ader
+    public static final String PURPURE = "\u001B[35m"; //Robert
 
-    room cuina = new room(1, "CUINA", new int[]{9,2}, new objecte[]{}, new npc[]{});
-    room menjador = new room(2, "MENJADOR", new int[]{1,7,4,9,6}, new objecte[]{}, new npc[]{});
+    objecte eina = new objecte(1, "Eina", "Una clau anglesa rovellada, encara prou resistent per fer servir."); //objecte
+    objecte pistola = new objecte(2, "Pistola", "Una pistola làser de reglament."); //Interactuable
+    objecte vestit = new objecte(3, "Vestit Espacial", "Un vestit espacial penjat a la paret, amb el casc una mica ratllat."); //objecte
+    objecte donut1 = new objecte(4, "Donut", "Un donut amb glaçat de xocolata, encara té bon aspecte."); //objecte
+    objecte donut2 = new objecte(5, "Donut", "Un donut de maduixa amb una mossegada, algú el va deixar a mitges."); //objecte
+    objecte donut3 = new objecte(6, "Donut", "Un donut sec i una mica aixafat, fa dies que és aquí."); //objecte
+    objecte xeringa1 = new objecte(7, "Xeringa", "Una xeringa segellada amb un líquid blau a dins."); //objecte
+    objecte xeringa2 = new objecte(8, "Xeringa", "Una xeringa segellada amb un líquid blau a dins."); //objecte
+    objecte xeringa3 = new objecte(9, "Xeringa", "Una xeringa segellada amb un líquid blau a dins."); //objecte
+    objecte keycardTaller = new objecte(10, "Keycard Taller", "Una targeta d'accés groga amb el logotip del taller."); //Interactuable
+    objecte keycardInfermeria = new objecte(11, "Keycard Infermeria", "Una targeta d'accés blanca amb una creu vermella."); //Interactuable
+    objecte llanterna = new objecte(12, "Llanterna", "Una llanterna petita de metall, la llum parpelleja una mica."); //objecte
+
+    room cuina = new room(1, "CUINA", new int[]{9,2}, new objecte[]{donut1}, new npc[]{});
+    room menjador = new room(2, "MENJADOR", new int[]{1,7,4,9,6}, new objecte[]{donut2}, new npc[]{});
     room dAder = new room(3, "D.ADER", new int[]{6}, new objecte[]{}, new npc[]{});
     room dElster = new room(4, "D.ELSTER", new int[]{8,7,4}, new objecte[]{}, new npc[]{});
     room dRobert = new room(5, "D.ROBERT", new int[]{9}, new objecte[]{}, new npc[]{});
     room navegacio = new room(6, "NAVEGACIO", new int[]{3,2}, new objecte[]{}, new npc[]{});
-    room banys = new room(7, "BANYS", new int[]{4,2}, new objecte[]{}, new npc[]{});
-    room infermeria = new room(8, "INFERMERIA", new int[]{4}, new objecte[]{}, new npc[]{});
-    room passadis = new room(9, "PASSADIS", new int[]{5,1,2,11}, new objecte[]{}, new npc[]{});
+    room banys = new room(7, "BANYS", new int[]{4,2}, new objecte[]{donut3}, new npc[]{});
+    room infermeria = new room(8, "INFERMERIA", new int[]{4}, new objecte[]{xeringa1}, new npc[]{});
+    room passadis = new room(9, "PASSADIS", new int[]{5,1,2,11}, new objecte[]{xeringa2}, new npc[]{});
     room sistemes = new room(10, "SISTEMES", new int[]{11}, new objecte[]{}, new npc[]{});
-    room taller = new room(11, "TALLER", new int[]{10,12,9}, new objecte[]{}, new npc[]{});
-    room sortida = new room(12, "SORTIDA EXTERIOR", new int[]{11,13}, new objecte[]{}, new npc[]{});
+    room taller = new room(11, "TALLER", new int[]{10,12,9}, new objecte[]{xeringa3, eina, llanterna}, new npc[]{});
+    room sortida = new room(12, "SORTIDA EXTERIOR", new int[]{11,13}, new objecte[]{vestit}, new npc[]{});
     room fora = new room(13, "FORA", new int[]{12}, new objecte[]{}, new npc[]{});
 
     room[] mapaZones = new room[]{
@@ -152,7 +165,7 @@ public class joc {
     public void bucle(){
         do {
             String[] comanda;
-            System.out.println("Estas en la habitacio: " + jugador.zonaActual);
+            System.out.println("Estas en la habitacio: " + GREEN + SUB + jugador.zonaActual + RESET);
             comanda = p.getComanda();
             if (comanda[0].equals("ANAR")) {
                 boolean sortidesIguals = false;
@@ -174,7 +187,7 @@ public class joc {
                 }
 
                 if(sortidesIguals == true){
-                    System.out.println("Has anat a " + jugador.zonaActual);
+                    System.out.println("Has anat a " + GREEN + SUB + jugador.zonaActual + RESET);
                 } else{
                     System.out.println("No pots anar a aquesta zona");
                 }
