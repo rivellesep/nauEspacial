@@ -7,7 +7,7 @@ public class parser{
     private String[] verbsPermesosLlanterna = {"ENCENDRE", "APAGAR", "USAR", "DEIXAR", "AGAFAR"};
     private String[] zonesPermeses = {"MENJADOR", "D.ADER", "D.ELSTER", "D.ROBERT", "NAVEGACIO", "BANYS", "INFERMERIA", "PASSADIS", "SISTEMES", "TALLER", "SORTIDA", "FORA", "CUINA"};
     private String[] itemsPermesos = {"LLANTERNA", "PISTOLA", "VESTIT", "EINA", "DONUT", "XERINGA", "C.ELSTER", "C.ROBERT"};
-
+    public static final String BOLD = "\u001B[1m";
     private Scanner sc;
 
     public parser(Scanner sc) {
@@ -15,7 +15,7 @@ public class parser{
     }
 
     public String[] getComanda() {
-        System.out.print("> ");
+        System.out.print(BOLD + "> ");
         String input = sc.nextLine().toUpperCase().trim();
         String[] parts = input.split("\\s+", 2);
 

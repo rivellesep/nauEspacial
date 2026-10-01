@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class joc {
     static Scanner sc = new Scanner(System.in);
     parser p = new parser(sc);
-
+    String mapaDigital
     //Mapa:
     // System.out.println("                             ┌──────────────────┐");
     // System.out.println("                             │ Dormitori Robert │");
@@ -34,7 +34,9 @@ public class joc {
     public static final String YELLOW = "\u001B[33m"; //iHall
     public static final String GREEN = "\u001B[32m"; //Objectes
     public static final String BLUE = "\u001B[34m"; //Ader
+    public static final String SUB_BLUE = "\u001B[44m";
     public static final String PURPURE = "\u001B[35m"; //Robert
+    public static final String SUB_WHITE = "\u001B[107m";
 
     objecte eina = new objecte(1, "Eina", "Una clau anglesa rovellada, encara prou resistent per fer servir."); //objecte
     objecte pistola = new objecte(2, "Pistola", "Una pistola làser de reglament."); //Interactuable
@@ -49,19 +51,23 @@ public class joc {
     objecte keycardInfermeria = new objecte(11, "Keycard Infermeria", "Una targeta d'accés blanca amb una creu vermella."); //Interactuable
     objecte llanterna = new objecte(12, "Llanterna", "Una llanterna petita de metall, la llum parpelleja una mica."); //objecte
 
-    room cuina = new room(1, "CUINA", new int[]{9,2}, new objecte[]{donut1}, new npc[]{});
-    room menjador = new room(2, "MENJADOR", new int[]{1,7,4,9,6}, new objecte[]{donut2}, new npc[]{});
-    room dAder = new room(3, "D.ADER", new int[]{6}, new objecte[]{}, new npc[]{});
-    room dElster = new room(4, "D.ELSTER", new int[]{8,7,4}, new objecte[]{}, new npc[]{});
-    room dRobert = new room(5, "D.ROBERT", new int[]{9}, new objecte[]{}, new npc[]{});
-    room navegacio = new room(6, "NAVEGACIO", new int[]{3,2}, new objecte[]{}, new npc[]{});
-    room banys = new room(7, "BANYS", new int[]{4,2}, new objecte[]{donut3}, new npc[]{});
-    room infermeria = new room(8, "INFERMERIA", new int[]{4}, new objecte[]{xeringa1}, new npc[]{});
-    room passadis = new room(9, "PASSADIS", new int[]{5,1,2,11}, new objecte[]{xeringa2}, new npc[]{});
-    room sistemes = new room(10, "SISTEMES", new int[]{11}, new objecte[]{}, new npc[]{});
-    room taller = new room(11, "TALLER", new int[]{10,12,9}, new objecte[]{xeringa3, eina, llanterna}, new npc[]{});
-    room sortida = new room(12, "SORTIDA EXTERIOR", new int[]{11,13}, new objecte[]{vestit}, new npc[]{});
-    room fora = new room(13, "FORA", new int[]{12}, new objecte[]{}, new npc[]{});
+    room cuina = new room(1, "CUINA", "Entres a la cuina, encara hi han plats del sopar d’avui que no s’han rentat; pero millor no preocupar-se d'allò encara.", new int[]{9,2}, new objecte[]{donut1}, new npc[]{});
+    room menjador = new room(2, "MENJADOR", "Estas al menjador, on la tripulació hi menja els seus apats i també usen el seu poc temps lliure per a jugar i estar junts.", new int[]{1,7,4,9,6}, new objecte[]{donut2}, new npc[]{});
+    room dAder = new room(3, "D.ADER", "El dormitori apte d’un capita; té l’ho suficient i només l’ho suficient.", new int[]{6}, new objecte[]{}, new npc[]{});
+    room dElster = new room(4, "D.ELSTER", "Un cop entres al seu dormitori, l'olor que entra al teu nas és refrescant i agradable; segurament es deu a les herbes al voltant de l’habitació.", new int[]{8,7,4}, new objecte[]{}, new npc[]{});
+    room dRobert = new room(5, "D.ROBERT", "Al entrar al dormitori d’en Robert s nota un aire metalic un cop obres la porta; ha estat treballant tot el dia pel que es nota.", new int[]{9}, new objecte[]{}, new npc[]{});
+    room navegacio = new room(6, "NAVEGACIO", "Entres a navegació. Mires a la varietat de botons i palanques davant teu, cada una porta el pes dels supervivents que vau deixar a la Terra.", new int[]{3,2}, new objecte[]{}, new npc[]{});
+    room banys = new room(7, "BANYS", "Els banys son simples i sorprenentment nets, pero no hi ha gaire cosa aquí.", new int[]{4,2}, new objecte[]{donut3}, new npc[]{});
+    room infermeria = new room(8, "INFERMERIA", "Entres a la infermeria i veus tecnologies que mai hi has entès; però mentre et facin sentir bé o t’ajudin a despertar-te demà: confies amb l'Ester que hi vagin bé.", new int[]{4}, new objecte[]{xeringa1}, new npc[]{});
+    room passadis = new room(9, "PASSADIS", "El passadís. Cada pas que hi fas dins s’escolta el metall sota la teva bota.", new int[]{5,1,2,11}, new objecte[]{xeringa2}, new npc[]{});
+    room sistemes = new room(10, "SISTEMES", "La part més crucial de la nau; els sistemes. En Robert és l’expert, pero tu de vegades t'encarregues de mirar-los.", new int[]{11}, new objecte[]{}, new npc[]{});
+    room taller = new room(11, "TALLER", "El taller, pràcticament la casa d’en Robert; ple de aparts utils que ell et diria que no els toquessis. També hi ha una caixa forta amb una pistola especial, pero esperes mai haver de usar-la.", new int[]{10,12,9}, new objecte[]{xeringa3, eina, llanterna}, new npc[]{});
+    room sortida = new room(12, "SORTIDA EXTERIOR", "A la sortida, tens una finestra on hi pots veure el teu planeta en ruina; esperes algun dia tornar com un heroi...", new int[]{11,13}, new objecte[]{vestit}, new npc[]{});
+    room fora = new room(13, "FORA", "Estas a fora. Sempre que hi estàs aquí fora pensen qui primer va tenir la idea de sortir a l’espai.", new int[]{12}, new objecte[]{}, new npc[]{});
+
+    // Textos extra de SISTEMES según el estado de la reparación
+    String sistemesNoReparat = "En l’estat que hi son ara mateix, necesitaras la eina per a poder repara-los.";
+    String sistemesReparat = "Penses que has acabat, pero veus el brillo d’una clau al terra. Toca embrutar-se les mans.";
 
     room[] mapaZones = new room[]{
         cuina, 
@@ -163,9 +169,9 @@ public class joc {
     }
 
     public void bucle(){
+        System.out.println("Estas a: " + GREEN + SUB + jugador.zonaActual + RESET);
         do {
             String[] comanda;
-            System.out.println("Estas en la habitacio: " + GREEN + SUB + jugador.zonaActual + RESET);
             comanda = p.getComanda();
             if (comanda[0].equals("ANAR")) {
                 boolean sortidesIguals = false;
@@ -187,11 +193,22 @@ public class joc {
                 }
 
                 if(sortidesIguals == true){
-                    System.out.println("Has anat a " + GREEN + SUB + jugador.zonaActual + RESET);
+                    System.out.println(GRAY + ITALICS + "Has anat a un altre zona..." + RESET);
+                    System.out.println("============================================================");
+                    System.out.println("Estas a: " + GREEN + SUB + jugador.zonaActual + RESET);
+                    System.out.println("------------------------------------------------------------");
+                    for(int i = 0; i < mapaZones.length; i++){
+                        if(mapaZones[i].nom.equals(jugador.zonaActual)){
+                            System.out.println(mapaZones[i].descripcio);
+                            System.out.println("============================================================");
+                        }
+                    }
                 } else{
                     System.out.println("No pots anar a aquesta zona");
                 }
-            } 
+            } else if(comanda[0].equals("USAR")){
+                
+            }
         } while (!(finalJoc));
     }
 
