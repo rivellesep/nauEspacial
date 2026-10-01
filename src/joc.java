@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class joc {
     static Scanner sc = new Scanner(System.in);
     parser p = new parser(sc);
-    String mapaDigital
+    String mapaDigital;
     //Mapa:
     // System.out.println("                             ┌──────────────────┐");
     // System.out.println("                             │ Dormitori Robert │");
