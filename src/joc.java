@@ -5,34 +5,34 @@ public class joc {
     static Scanner sc = new Scanner(System.in);
     parser p = new parser(sc);
 
-    public static final String RESET = "\u001B[0m"; //Per reiniciar els colors.
+    public static final String RESET = "\u001B[0m";
     public static final String CROSS = "\u001B[9m";
     public static final String SUB = "\u001B[4m";
     public static final String ITALICS = "\u001B[3m";
-    public static final String RED = "\u001B[31m"; //Elster
-    public static final String GRAY = "\u001B[90m"; // Subtitols
-    public static final String YELLOW = "\u001B[33m"; //iHall
-    public static final String GREEN = "\u001B[32m"; //Objectes
-    public static final String BLUE = "\u001B[34m"; //Ader
+    public static final String RED = "\u001B[31m";
+    public static final String GRAY = "\u001B[90m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String BLUE = "\u001B[34m";
     public static final String SUB_BLUE = "\u001B[44m";
-    public static final String PURPURE = "\u001B[35m"; //Robert
+    public static final String PURPURE = "\u001B[35m";
     public static final String SUB_WHITE = "\u001B[107m";
-    public static final String SUB_GREEN = "\u001B[42m"; //Malien al mapa
-    public static final String SUB_RED = "\u001B[41m";   //Llocs per reparar al mapa
+    public static final String SUB_GREEN = "\u001B[42m";
+    public static final String SUB_RED = "\u001B[41m";
 
-    objecte eina = new objecte(1, "Eina", "Una clau anglesa rovellada, encara prou resistent per fer servir."); //objecte
-    objecte pistola = new objecte(2, "Pistola", "Una pistola làser de reglament."); //Interactuable
-    objecte vestit = new objecte(3, "Vestit Espacial", "Un vestit espacial penjat a la paret, amb el casc una mica ratllat."); //objecte
-    objecte donut1 = new objecte(4, "Donut", "Un donut amb glaçat de xocolata, encara té bon aspecte."); //objecte
-    objecte donut2 = new objecte(5, "Donut", "Un donut de maduixa amb una mossegada, algú el va deixar a mitges."); //objecte
-    objecte donut3 = new objecte(6, "Donut", "Un donut sec i una mica aixafat, fa dies que és aquí."); //objecte
-    objecte xeringa1 = new objecte(7, "Xeringa", "Una xeringa segellada amb un líquid blau a dins."); //objecte
-    objecte xeringa2 = new objecte(8, "Xeringa", "Una xeringa segellada amb un líquid blau a dins."); //objecte
-    objecte xeringa3 = new objecte(9, "Xeringa", "Una xeringa segellada amb un líquid blau a dins."); //objecte
-    objecte keycardSistemes = new objecte(10, "Keycard Sistemes", "Una targeta d'accés groga amb el logotip de sistemes."); //la dona en Robert
-    objecte keycardInfermeria = new objecte(11, "Keycard Infermeria", "Una targeta d'accés blanca amb una creu vermella."); //Interactuable
-    objecte llanterna = new objecte(12, "Llanterna", "Una llanterna petita de metall, la llum parpelleja una mica."); //objecte
-    objecte clau = new objecte(13, "Clau", "Una clau petita i greixosa. Sembla de la caixa forta del taller."); //surt en reparar SISTEMES
+    objecte eina = new objecte(1, "Eina", "Una clau anglesa rovellada, encara prou resistent per fer servir.");
+    objecte pistola = new objecte(2, "Pistola", "Una pistola làser de reglament.");
+    objecte vestit = new objecte(3, "Vestit Espacial", "Un vestit espacial penjat a la paret, amb el casc una mica ratllat.");
+    objecte donut1 = new objecte(4, "Donut", "Un donut amb glaçat de xocolata, encara té bon aspecte.");
+    objecte donut2 = new objecte(5, "Donut", "Un donut de maduixa amb una mossegada, algú el va deixar a mitges.");
+    objecte donut3 = new objecte(6, "Donut", "Un donut sec i una mica aixafat, fa dies que és aquí.");
+    objecte xeringa1 = new objecte(7, "Xeringa", "Una xeringa segellada amb un líquid blau a dins.");
+    objecte xeringa2 = new objecte(8, "Xeringa", "Una xeringa segellada amb un líquid blau a dins.");
+    objecte xeringa3 = new objecte(9, "Xeringa", "Una xeringa segellada amb un líquid blau a dins.");
+    objecte keycardSistemes = new objecte(10, "Keycard Sistemes", "Una targeta d'accés groga amb el logotip de sistemes.");
+    objecte keycardInfermeria = new objecte(11, "Keycard Infermeria", "Una targeta d'accés blanca amb una creu vermella.");
+    objecte llanterna = new objecte(12, "Llanterna", "Una llanterna petita de metall, la llum parpelleja una mica.");
+    objecte clau = new objecte(13, "Clau", "Una clau petita i greixosa. Sembla de la caixa forta del taller.");
 
     room cuina = new room(1, "CUINA", "Entres a la cuina, encara hi han plats del sopar d’avui que no s’han rentat; pero millor no preocupar-se d'allò encara.", new int[]{9,2}, new objecte[]{donut1}, new interactuable[]{});
     room menjador = new room(2, "MENJADOR", "Estas al menjador, on la tripulació hi menja els seus apats i també usen el seu poc temps lliure per a jugar i estar junts.", new int[]{1,7,4,9,6}, new objecte[]{donut2}, new interactuable[]{});
@@ -48,7 +48,6 @@ public class joc {
     room sortida = new room(12, "SORTIDA EXTERIOR", "A la sortida, tens una finestra on hi pots veure el teu planeta en ruina; esperes algun dia tornar com un heroi...", new int[]{11,13}, new objecte[]{vestit}, new interactuable[]{});
     room fora = new room(13, "FORA", "Estas a fora. Sempre que hi estàs aquí fora pensen qui primer va tenir la idea de sortir a l’espai.", new int[]{12}, new objecte[]{}, new interactuable[]{});
 
-    // Textos extra de SISTEMES según el estado de la reparación
     String sistemesNoReparat = "En l’estat que hi son ara mateix, necesitaras la eina per a poder repara-los.";
     String sistemesReparat = "Penses que has acabat, pero veus el brillo d’una clau al terra. Toca embrutar-se les mans.";
 
@@ -69,7 +68,6 @@ public class joc {
 
     player jugador = new player(new objecte[6], 0, false, false, "D.ADER", false);
 
-    // ===== INTERACTUABLES =====
     reparable reparacioFora = new reparable(fora, "Ajustes les plaques amb l'eina i l'avaria queda arreglada. Però al costat hi ha un forat a la paret de la nau...", null);
     reparable reparacioSistemes = new reparable(sistemes, sistemesReparat, clau);
     caixaForta caixa = new caixaForta(taller, pistola);
@@ -85,24 +83,37 @@ public class joc {
         "\"Té la meva targeta. I no toquis res que no calgui!\""
     }, "\"Què més vols? Ja tens la targeta, ves a sistemes!\"");
 
-    // Tots els que reben comandes i torns
     interactuable[] interactuables = {reparacioFora, reparacioSistemes, caixa, elMalien, elster, robert};
-    // Per mostrar-los al mapa i a les sales
     reparable[] reparacions = {reparacioFora, reparacioSistemes};
     company[] companys = {elster, robert};
 
-    // Sales on hi ha un donut parat com a esquer pel Malien
     ArrayList<room> donutsParats = new ArrayList<>();
 
     int contarTorns;
     boolean finalJoc;
+    boolean guanyat = false;
 
     public joc(int contarTorns,boolean finalJoc){
         this.contarTorns = contarTorns;
         this.finalJoc = finalJoc;
     }
 
-    public void iniciar(){
+    public boolean iniciar(boolean ambIntro){
+        if (ambIntro) {
+            intro();
+        } else {
+            objectiu();
+        }
+        bucle();
+        if (guanyat) {
+            pantallaVictoria();
+        } else {
+            pantallaMort();
+        }
+        return menuFinal();
+    }
+
+    private void intro(){
         System.out.println();
         System.out.println("  ==============================================");
         System.out.println("                    P I A . X X                 ");
@@ -167,13 +178,15 @@ public class joc {
  
         System.out.println(GRAY + "  ----------------------------------------------" + RESET);
         System.out.println();
- 
+
+        objectiu();
+    }
+
+    private void objectiu(){
         System.out.println(YELLOW + "  iHall: " + RESET + YELLOW + "\"Anem al " + SUB + "Taller" + RESET + YELLOW + ". Hi trobaras l'" + GREEN + "Eina" + YELLOW + " i el " + GREEN + "vestit espacial" + YELLOW + ".\"" + RESET);
         System.out.println();
         System.out.println(GREEN + "  >> NOU OBJECTIU: Ves al Taller i agafa l'Eina." + RESET);
         sc.nextLine();
-
-        bucle();
     }
 
     public void bucle(){
@@ -182,7 +195,6 @@ public class joc {
             String[] comanda;
             comanda = p.getComanda();
             if (comanda[0].equals("ANAR") && !portaOberta(comanda[1])) {
-                // portaOberta() ja diu el missatge
             } else if (comanda[0].equals("ANAR")) {
                 boolean sortidesIguals = false;
                 for(int i = 0; i < mapaZones.length; i++){
@@ -226,7 +238,6 @@ public class joc {
             } else if(comanda[0].equals("DEIXAR")){
                 deixar(comanda[1]);
             } else {
-                // La resta de comandes les proven els interactuables fins que un la fa servir
                 boolean fet = false;
                 for (int i = 0; i < interactuables.length && !fet; i++) {
                     fet = interactuables[i].interaccio(comanda[0], comanda[1], this);
@@ -236,22 +247,54 @@ public class joc {
                 }
             }
 
-            // Passa un torn (si encara segueixes viu)
             contarTorns++;
             for (int i = 0; i < interactuables.length && !finalJoc; i++) {
                 interactuables[i].tornPassat(this);
             }
+            comprovarFinal();
         } while (!(finalJoc));
-
-        if (jugador.mort) {
-            System.out.println();
-            System.out.println(RED + "  ==============================================" + RESET);
-            System.out.println(RED + "                  H A S   M O R T               " + RESET);
-            System.out.println(RED + "  ==============================================" + RESET);
-        }
     }
 
-    // Deixa un donut a terra. Si el Malien hi passa, es distreu i queda aturdit.
+    public void pantallaMort(){
+        System.out.println();
+        System.out.println(RED + "  ==============================================" + RESET);
+        System.out.println(RED + "                  H A S   M O R T               " + RESET);
+        System.out.println(RED + "  ==============================================" + RESET);
+        System.out.println();
+        System.out.println(ITALICS + "  La Pia.XX segueix flotant en silenci sobre la lluna." + RESET);
+        System.out.println(ITALICS + "  A la Terra, ningú sabrà mai què va passar aquella nit." + RESET);
+        System.out.println();
+        System.out.println(GRAY + "  Torns jugats: " + contarTorns + RESET);
+        System.out.println();
+    }
+
+    public void pantallaVictoria(){
+        System.out.println();
+        System.out.println(GREEN + "  ==============================================" + RESET);
+        System.out.println(GREEN + "               H A S   G U A N Y A T            " + RESET);
+        System.out.println(GREEN + "  ==============================================" + RESET);
+        System.out.println();
+        System.out.println(ITALICS + "  El Malien ja no és una amenaça i la nau torna a funcionar." + RESET);
+        System.out.println(ITALICS + "  Demà la Pia.XX seguirà buscant recursos per la Terra..." + RESET);
+        System.out.println(ITALICS + "  però aquesta nit, el capità " + BLUE + "Ader" + RESET + ITALICS + " ha estat un heroi." + RESET);
+        System.out.println();
+        System.out.println(YELLOW + "  iHall: \"Ho veus, capità? Sempre una actitud positiva!\"" + RESET);
+        System.out.println();
+        System.out.println(GRAY + "  Torns jugats: " + contarTorns + RESET);
+        System.out.println();
+    }
+
+    public boolean menuFinal(){
+        String opcio;
+        do {
+            System.out.println("1. Tornar a començar");
+            System.out.println("2. Sortir del joc");
+            System.out.print("> ");
+            opcio = sc.nextLine().trim();
+        } while (!opcio.equals("1") && !opcio.equals("2"));
+        return opcio.equals("1");
+    }
+
     public void posarDonut(){
         if (jugador.treureObjecte("DONUT") == null) {
             System.out.println("No tens cap donut.");
@@ -270,7 +313,6 @@ public class joc {
         return null;
     }
 
-    // INFERMERIA i SISTEMES necessiten la seva targeta, i FORA sense vestit et mata
     public boolean portaOberta(String desti){
         if (desti.equals("FORA") && jugador.zonaActual.equals("SORTIDA EXTERIOR") && !jugador.teObjecte("VESTIT")) {
             System.out.println(ITALICS + "Obres la comporta sense el vestit espacial..." + RESET);
@@ -290,7 +332,6 @@ public class joc {
         return true;
     }
 
-    // Text extra de SISTEMES, qui hi ha i objectes que hi ha a terra
     public void mostrarExtresSala(){
         room sala = salaActual();
         if (sala == sistemes && !reparacioSistemes.isReparat()) {
@@ -343,11 +384,20 @@ public class joc {
     }
 
     public void comprovarFinal(){
-
+        if (finalJoc || !elMalien.isMort()) {
+            return;
+        }
+        for (int i = 0; i < reparacions.length; i++) {
+            if (!reparacions[i].isReparat()) {
+                return;
+            }
+        }
+        guanyat = true;
+        finalJoc = true;
     }
 
     public static boolean skillCheck(int velocitat) {
-        int inici = (int) (Math.random() * 25); // la zona verda fa 5 caselles
+        int inici = (int) (Math.random() * 25);
         int pos = 0;
         int direccio = 1;
 
@@ -363,13 +413,13 @@ public class joc {
                 System.out.print("\r[" + barra + "]");
 
                 Thread.sleep(velocitat);
-                if (System.in.available() > 0) break; // ha premut ENTER
+                if (System.in.available() > 0) break;
 
                 pos += direccio;
                 if (pos == 0 || pos == 29) direccio = -direccio;
             }
         } catch (Exception e) { }
-        sc.nextLine(); // treu l'ENTER
+        sc.nextLine();
 
         if (pos >= inici && pos < inici + 5) {
             System.out.println(GREEN + "Perfecte!" + RESET);

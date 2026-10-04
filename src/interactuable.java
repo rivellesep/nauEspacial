@@ -11,10 +11,8 @@ public abstract class interactuable{
         return zona;
     }
 
-    // El joc li passa cada comanda. Retorna true si l'ha fet servir.
     public abstract boolean interaccio(String verb, String objectiu, joc j);
 
-    // Es crida un cop per torn. Per defecte no fa res.
     public void tornPassat(joc j){
     }
 

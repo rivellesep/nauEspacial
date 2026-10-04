@@ -22,7 +22,6 @@ public class caixaForta extends interactuable{
             return true;
         }
 
-        // Primer treiem la clau, així sempre hi ha lloc pel contingut
         oberta = true;
         j.jugador.treureObjecte("CLAU");
         j.jugador.afegirObjecte(contingut);

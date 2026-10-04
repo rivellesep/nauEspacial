@@ -1,7 +1,7 @@
 public class reparable extends interactuable{
     private boolean reparat;
     private String missatgeReparat;
-    private objecte recompensa; // pot ser null
+    private objecte recompensa;
 
     public reparable(room zona, String missatgeReparat, objecte recompensa){
         super("REPARABLE", zona);

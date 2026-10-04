@@ -1,8 +1,8 @@
 public class company extends interactuable{
-    private String color;        // joc.RED per Elster, joc.PURPURE per Robert
-    private objecte regal;       // el que et dona en acabar de parlar
-    private String[] dialeg;     // linies alternades: parell = company, senar = Ader
-    private String fraseDespres; // el que diu si hi tornes a parlar
+    private String color;
+    private objecte regal;
+    private String[] dialeg;
+    private String fraseDespres;
     private boolean jaHaParlat;
 
     public company(String nom, room zona, String color, objecte regal, String[] dialeg, String fraseDespres){
@@ -20,12 +20,10 @@ public class company extends interactuable{
 
     @Override
     public boolean interaccio(String verb, String objectiu, joc j){
-        // nom = "Elster" -> serveix PARLAR ELSTER o PARLAR C.ELSTER
         boolean ambMi = objectiu.equals(nom.toUpperCase()) || objectiu.equals("C." + nom.toUpperCase());
         if (!verb.equals("PARLAR") || !ambMi || !jugadorAqui(j)) {
             return false;
         }
-        // Abans que aparegui el Malien estan dormint
         if (!j.elMalien.isActiu()) {
             System.out.println(nomAmbColor() + " està dormint, millor no molestar.");
             return true;

@@ -9,7 +9,6 @@ public class room{
     ArrayList<objecte> objectesPresents;
     interactuable[] interactuablesPresents;
 
-
     public room(int identificador, String nom, String descripcio, int[] sortides, objecte[] objectesPresents, interactuable[] interactuablesPresents) {
         this.identificador = identificador;
         this.nom = nom;
@@ -19,7 +18,6 @@ public class room{
         this.interactuablesPresents = interactuablesPresents;
     }
 
-    // Busca un objecte pel nom que surt a la comanda (EINA, VESTIT, CLAU...)
     public objecte buscarObjecte(String nomComanda){
         for (int i = 0; i < objectesPresents.size(); i++) {
             if (objectesPresents.get(i).nom.toUpperCase().startsWith(nomComanda)) {

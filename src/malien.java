@@ -7,12 +7,12 @@ public class malien extends interactuable{
     private boolean mort;
     private int tornsAturdit;
     private int tornsSenseMoure;
-    private room zonaAparicio;    // on apareix quan s'activa
-    private room salaActivacio;   // s'activa quan el jugador hi entra...
-    private reparable tutorial;   // ...i ja ha reparat això
+    private room zonaAparicio;
+    private room salaActivacio;
+    private reparable tutorial;
 
     public malien(room zonaAparicio, room salaActivacio, reparable tutorial){
-        super("MALIEN", null); // no és a cap sala fins que s'activa
+        super("MALIEN", null);
         this.zonaAparicio = zonaAparicio;
         this.salaActivacio = salaActivacio;
         this.tutorial = tutorial;
@@ -62,7 +62,7 @@ public class malien extends interactuable{
             System.out.println("Et claves la xeringa. El líquid blau et neteja la infecció.");
         }
         if (aqui) {
-            tornsAturdit = TORNS_ATURDIT + 1; // +1 perquè aquest mateix torn ja en resta un
+            tornsAturdit = TORNS_ATURDIT + 1;
             System.out.println("El Malien es retorç i queda aturdit.");
         }
         return true;
@@ -101,7 +101,6 @@ public class malien extends interactuable{
             return;
         }
 
-        // La infecció avança encara que el Malien estigui aturdit
         if (j.jugador.infectat) {
             j.jugador.statusInfeccio++;
             int queden = TORNS_INFECCIO - j.jugador.statusInfeccio;
@@ -111,7 +110,11 @@ public class malien extends interactuable{
                 System.out.println(joc.RED + "La infecció et consumeix per dins. Caus a terra... Has mort." + joc.RESET);
                 return;
             }
-            System.out.println(joc.RED + "Et sents cada cop pitjor... Et queden " + queden + " torns." + joc.RESET);
+            String paraula = "torns";
+            if (queden == 1) {
+                paraula = "torn";
+            }
+            System.out.println(joc.RED + "Et sents cada cop pitjor... Et queden " + queden + " " + paraula + "." + joc.RESET);
         }
 
         if (tornsAturdit > 0) {
@@ -128,7 +131,6 @@ public class malien extends interactuable{
             moureAleatori(j);
         }
 
-        // Si hi ha un donut on és, es distreu i queda aturdit (el donut desapareix)
         if (j.donutsParats.contains(zona)) {
             j.donutsParats.remove(zona);
             tornsAturdit = TORNS_ATURDIT;
@@ -143,7 +145,6 @@ public class malien extends interactuable{
         }
     }
 
-    // Va a una sala de sortida a l'atzar (mai a FORA)
     private void moureAleatori(joc j){
         int idDesti = zona.sortides[(int) (Math.random() * zona.sortides.length)];
         for (int i = 0; i < j.mapaZones.length; i++) {

@@ -25,8 +25,6 @@ public class player {
         " │ INFERMERIA ├─┤     D.ELSTER     ├─┤ BANYS │\n" +
         " └────────────┘ └──────────────────┘ └───────┘";
 
-
-
     public player(objecte[] inventari, int statusInfeccio, boolean infectat, boolean mort, String zonaActual, boolean teVestit){
         this.inventari = inventari;
         this.statusInfeccio = statusInfeccio;
@@ -41,9 +39,8 @@ public class player {
         do {
             System.out.println("1. Veure mapa");
             System.out.println("2. Comprovar malien");
-            System.out.println("3. salir");
-            System.out.println("4. Minijuego");
-            System.out.println("5. Veure inventari");
+            System.out.println("3. Veure inventari");
+            System.out.println("4. Sortir");
             System.out.print("> ");
             opcio = joc.sc.nextLine().trim();
             switch (opcio) {
@@ -53,38 +50,23 @@ public class player {
                 case "2":
                     veureMalien(j);
                     break;
-
                 case "3":
-
-                    break;
-
-                case "4":
-                    if (joc.skillCheck(15)) {
-                        System.out.println("Has superat el minijoc!");
-
-                    } else {
-                        System.out.println("Has fallat el minijoc...");
-                    }
-                    break;
-
-                case "5":
                     mostrarInventari();
                     break;
-
+                case "4":
+                    break;
                 default:
                     break;
             }
-        } while (!(opcio.equals("3")));
+        } while (!(opcio.equals("4")));
         opcio = "0";
     }
 
-    // Pinta una zona del mapa amb un color de fons
     private String marcar(String mapa, String nomZona, String color){
         String zona = " " + nomZona + " ";
         return mapa.replace(zona, color + zona + joc.RESET);
     }
 
-    // On ets tu (blau) i on queda reparar (vermell)
     public void veureMapa(joc j){
         String mapa = mapaDigital;
         for (int i = 0; i < j.reparacions.length; i++) {
@@ -92,12 +74,11 @@ public class player {
                 mapa = marcar(mapa, j.reparacions[i].getZona().nom, joc.SUB_RED);
             }
         }
-        mapa = marcar(mapa, zonaActual, joc.SUB_BLUE); // l'últim, perquè guanyi el blau
+        mapa = marcar(mapa, zonaActual, joc.SUB_BLUE);
         System.out.println(mapa);
         System.out.println(joc.SUB_BLUE + "  " + joc.RESET + " Ets aquí   " + joc.SUB_RED + "  " + joc.RESET + " Per reparar");
     }
 
-    // Només surt el Malien (verd)
     public void veureMalien(joc j){
         if (j.elMalien.isMort()) {
             System.out.println(joc.YELLOW + "iHall: \"El senyal del Malien ha desaparegut. Ja no es mou.\"" + joc.RESET);
@@ -112,9 +93,6 @@ public class player {
         System.out.println(joc.YELLOW + "iHall: \"El Malien és a " + sala + ".\"" + joc.RESET);
     }
 
-    // ===== INVENTARI =====
-    // nomComanda és com surt a la comanda: EINA, XERINGA, CLAU...
-
     private int posicioObjecte(String nomComanda){
         for (int i = 0; i < inventari.length; i++) {
             if (inventari[i] != null && inventari[i].nom.toUpperCase().startsWith(nomComanda)) {
@@ -128,7 +106,6 @@ public class player {
         return posicioObjecte(nomComanda) != -1;
     }
 
-    // Treu l'objecte de l'inventari i el retorna (null si no el tenies)
     public objecte treureObjecte(String nomComanda){
         int pos = posicioObjecte(nomComanda);
         if (pos == -1) {
@@ -148,7 +125,6 @@ public class player {
         return true;
     }
 
-    // Retorna false si no hi cap
     public boolean afegirObjecte(objecte o){
         for (int i = 0; i < inventari.length; i++) {
             if (inventari[i] == null) {
