@@ -1,30 +1,10 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class joc {
     static Scanner sc = new Scanner(System.in);
     parser p = new parser(sc);
-    String mapaDigital;
-    //Mapa:
-    // System.out.println("                             ┌──────────────────┐");
-    // System.out.println("                             │ Dormitori Robert │");
-    // System.out.println("                             └────────┬─────────┘");
-    // System.out.println("                 ┌────────────────────┴────────────────────────┐");
-    // System.out.println("                 │                   Passadis                  │─────────┐");
-    // System.out.println("                 └───────┬─────────────────────────┬───────────┘         │");
-    // System.out.println("                         │                         │                     │");
-    // System.out.println(" ┌─────────────────┐ ┌───┴────────────────────┐  ┌─┴─────┐           ┌───┴────┐   ┌──────────────────┐  ┌──────┐");
-    // System.out.println(" │ Dormitori Aider │ │                        ├──┤ Cuina │           │ Taller ├───┤ Sortida Exterior ├──┤ Fora │");
-    // System.out.println(" └────────┬────────┘ │                        │  └───────┘           └───┬────┘   └──────────────────┘  └──────┘");
-    // System.out.println("          │          │        Menjador        │                          │");
-    // System.out.println(" ┌────────┴────────┐ │                        │                     ┌────┴─────┐");
-    // System.out.println(" │    Navegacio    ├─┤                        │                     │ Sistemas │");
-    // System.out.println(" └─────────────────┘ └──────┬──────────┬──────┘                     └──────────┘");
-    // System.out.println("                            │          │");
-    // System.out.println(" ┌────────────┐ ┌───────────┴──────┐ ┌─┴─────┐");
-    // System.out.println(" │ Infermeria ├─┤ Dormitori Elster ├─┤ Banys │");
-    // System.out.println(" └────────────┘ └──────────────────┘ └───────┘");
 
-    //Colors per mes endavant...
     public static final String RESET = "\u001B[0m"; //Per reiniciar els colors.
     public static final String CROSS = "\u001B[9m";
     public static final String SUB = "\u001B[4m";
@@ -37,6 +17,8 @@ public class joc {
     public static final String SUB_BLUE = "\u001B[44m";
     public static final String PURPURE = "\u001B[35m"; //Robert
     public static final String SUB_WHITE = "\u001B[107m";
+    public static final String SUB_GREEN = "\u001B[42m"; //Malien al mapa
+    public static final String SUB_RED = "\u001B[41m";   //Llocs per reparar al mapa
 
     objecte eina = new objecte(1, "Eina", "Una clau anglesa rovellada, encara prou resistent per fer servir."); //objecte
     objecte pistola = new objecte(2, "Pistola", "Una pistola làser de reglament."); //Interactuable
@@ -47,14 +29,15 @@ public class joc {
     objecte xeringa1 = new objecte(7, "Xeringa", "Una xeringa segellada amb un líquid blau a dins."); //objecte
     objecte xeringa2 = new objecte(8, "Xeringa", "Una xeringa segellada amb un líquid blau a dins."); //objecte
     objecte xeringa3 = new objecte(9, "Xeringa", "Una xeringa segellada amb un líquid blau a dins."); //objecte
-    objecte keycardTaller = new objecte(10, "Keycard Taller", "Una targeta d'accés groga amb el logotip del taller."); //Interactuable
+    objecte keycardSistemes = new objecte(10, "Keycard Sistemes", "Una targeta d'accés groga amb el logotip de sistemes."); //la dona en Robert
     objecte keycardInfermeria = new objecte(11, "Keycard Infermeria", "Una targeta d'accés blanca amb una creu vermella."); //Interactuable
     objecte llanterna = new objecte(12, "Llanterna", "Una llanterna petita de metall, la llum parpelleja una mica."); //objecte
+    objecte clau = new objecte(13, "Clau", "Una clau petita i greixosa. Sembla de la caixa forta del taller."); //surt en reparar SISTEMES
 
     room cuina = new room(1, "CUINA", "Entres a la cuina, encara hi han plats del sopar d’avui que no s’han rentat; pero millor no preocupar-se d'allò encara.", new int[]{9,2}, new objecte[]{donut1}, new interactuable[]{});
     room menjador = new room(2, "MENJADOR", "Estas al menjador, on la tripulació hi menja els seus apats i també usen el seu poc temps lliure per a jugar i estar junts.", new int[]{1,7,4,9,6}, new objecte[]{donut2}, new interactuable[]{});
     room dAder = new room(3, "D.ADER", "El dormitori apte d’un capita; té l’ho suficient i només l’ho suficient.", new int[]{6}, new objecte[]{}, new interactuable[]{});
-    room dElster = new room(4, "D.ELSTER", "Un cop entres al seu dormitori, l'olor que entra al teu nas és refrescant i agradable; segurament es deu a les herbes al voltant de l’habitació.", new int[]{8,7,4}, new objecte[]{}, new interactuable[]{});
+    room dElster = new room(4, "D.ELSTER", "Un cop entres al seu dormitori, l'olor que entra al teu nas és refrescant i agradable; segurament es deu a les herbes al voltant de l’habitació.", new int[]{8,7,2}, new objecte[]{}, new interactuable[]{});
     room dRobert = new room(5, "D.ROBERT", "Al entrar al dormitori d’en Robert s nota un aire metalic un cop obres la porta; ha estat treballant tot el dia pel que es nota.", new int[]{9}, new objecte[]{}, new interactuable[]{});
     room navegacio = new room(6, "NAVEGACIO", "Entres a navegació. Mires a la varietat de botons i palanques davant teu, cada una porta el pes dels supervivents que vau deixar a la Terra.", new int[]{3,2}, new objecte[]{}, new interactuable[]{});
     room banys = new room(7, "BANYS", "Els banys son simples i sorprenentment nets, pero no hi ha gaire cosa aquí.", new int[]{4,2}, new objecte[]{donut3}, new interactuable[]{});
@@ -84,7 +67,32 @@ public class joc {
         fora
     };
 
-    player jugador = new player(null, 0, false, false, "D.ADER", false);
+    player jugador = new player(new objecte[6], 0, false, false, "D.ADER", false);
+
+    // ===== INTERACTUABLES =====
+    reparable reparacioFora = new reparable(fora, "Ajustes les plaques amb l'eina i l'avaria queda arreglada. Però al costat hi ha un forat a la paret de la nau...", null);
+    reparable reparacioSistemes = new reparable(sistemes, sistemesReparat, clau);
+    caixaForta caixa = new caixaForta(taller, pistola);
+    malien elMalien = new malien(cuina, taller, reparacioFora);
+    company elster = new company("Elster", dElster, RED, keycardInfermeria, new String[]{
+        "\"Capità? Què passa? Per què fas aquesta cara?\"",
+        "\"Hi ha alguna cosa a la nau. Necessito poder entrar a la infermeria.\"",
+        "\"Agafa la meva targeta. Jo em tanco aquí dins.\""
+    }, "\"Ja t'he donat la targeta, capità. Ves amb compte.\"");
+    company robert = new company("Robert", dRobert, PURPURE, keycardSistemes, new String[]{
+        "\"Has sentit aquell soroll? Venia de la cuina.\"",
+        "\"Sí. I els sistemes estan fallant, necessito entrar-hi.\"",
+        "\"Té la meva targeta. I no toquis res que no calgui!\""
+    }, "\"Què més vols? Ja tens la targeta, ves a sistemes!\"");
+
+    // Tots els que reben comandes i torns
+    interactuable[] interactuables = {reparacioFora, reparacioSistemes, caixa, elMalien, elster, robert};
+    // Per mostrar-los al mapa i a les sales
+    reparable[] reparacions = {reparacioFora, reparacioSistemes};
+    company[] companys = {elster, robert};
+
+    // Sales on hi ha un donut parat com a esquer pel Malien
+    ArrayList<room> donutsParats = new ArrayList<>();
 
     int contarTorns;
     boolean finalJoc;
@@ -173,7 +181,9 @@ public class joc {
         do {
             String[] comanda;
             comanda = p.getComanda();
-            if (comanda[0].equals("ANAR")) {
+            if (comanda[0].equals("ANAR") && !portaOberta(comanda[1])) {
+                // portaOberta() ja diu el missatge
+            } else if (comanda[0].equals("ANAR")) {
                 boolean sortidesIguals = false;
                 for(int i = 0; i < mapaZones.length; i++){
                     if (mapaZones[i].nom.equals(comanda[1])){
@@ -203,16 +213,169 @@ public class joc {
                             System.out.println("============================================================");
                         }
                     }
+                    mostrarExtresSala();
                 } else{
                     System.out.println("No pots anar a aquesta zona");
                 }
-            } else if(comanda[0].equals("USAR")){
-                
+            } else if(comanda[0].equals("USAR") && comanda[1].equals("IHALL")){
+                jugador.iHall(this);
+            } else if(comanda[0].equals("USAR") && comanda[1].equals("DONUT")){
+                posarDonut();
+            } else if(comanda[0].equals("AGAFAR")){
+                agafar(comanda[1]);
+            } else if(comanda[0].equals("DEIXAR")){
+                deixar(comanda[1]);
+            } else {
+                // La resta de comandes les proven els interactuables fins que un la fa servir
+                boolean fet = false;
+                for (int i = 0; i < interactuables.length && !fet; i++) {
+                    fet = interactuables[i].interaccio(comanda[0], comanda[1], this);
+                }
+                if (!fet) {
+                    System.out.println("No pots fer això aquí.");
+                }
+            }
+
+            // Passa un torn (si encara segueixes viu)
+            contarTorns++;
+            for (int i = 0; i < interactuables.length && !finalJoc; i++) {
+                interactuables[i].tornPassat(this);
             }
         } while (!(finalJoc));
+
+        if (jugador.mort) {
+            System.out.println();
+            System.out.println(RED + "  ==============================================" + RESET);
+            System.out.println(RED + "                  H A S   M O R T               " + RESET);
+            System.out.println(RED + "  ==============================================" + RESET);
+        }
+    }
+
+    // Deixa un donut a terra. Si el Malien hi passa, es distreu i queda aturdit.
+    public void posarDonut(){
+        if (jugador.treureObjecte("DONUT") == null) {
+            System.out.println("No tens cap donut.");
+            return;
+        }
+        donutsParats.add(salaActual());
+        System.out.println("Deixes un donut ben visible a terra. Potser distreu alguna cosa...");
+    }
+
+    public room salaActual(){
+        for (int i = 0; i < mapaZones.length; i++) {
+            if (mapaZones[i].nom.equals(jugador.zonaActual)) {
+                return mapaZones[i];
+            }
+        }
+        return null;
+    }
+
+    // INFERMERIA i SISTEMES necessiten la seva targeta, i FORA sense vestit et mata
+    public boolean portaOberta(String desti){
+        if (desti.equals("FORA") && jugador.zonaActual.equals("SORTIDA EXTERIOR") && !jugador.teObjecte("VESTIT")) {
+            System.out.println(ITALICS + "Obres la comporta sense el vestit espacial..." + RESET);
+            System.out.println(RED + "El buit de l'espai t'arrossega cap a fora. No hi ha aire. No hi ha res." + RESET);
+            jugador.mort = true;
+            finalJoc = true;
+            return false;
+        }
+        if (desti.equals("INFERMERIA") && !jugador.teObjecte("KEYCARD INFERMERIA")) {
+            System.out.println("La porta de la infermeria està tancada. Necessites la targeta de l'" + RED + "Elster" + RESET + ".");
+            return false;
+        }
+        if (desti.equals("SISTEMES") && !jugador.teObjecte("KEYCARD SISTEMES")) {
+            System.out.println("La porta de sistemes està tancada. Necessites la targeta d'en " + PURPURE + "Robert" + RESET + ".");
+            return false;
+        }
+        return true;
+    }
+
+    // Text extra de SISTEMES, qui hi ha i objectes que hi ha a terra
+    public void mostrarExtresSala(){
+        room sala = salaActual();
+        if (sala == sistemes && !reparacioSistemes.isReparat()) {
+            System.out.println(sistemesNoReparat);
+        }
+        for (int i = 0; i < companys.length; i++) {
+            if (companys[i].getZona() == sala) {
+                System.out.println("Hi ha: " + companys[i].nomAmbColor());
+            }
+        }
+        if (elMalien.isActiu() && elMalien.getZona() == sala) {
+            System.out.println(RED + "El Malien és aquí!" + RESET);
+        }
+        if (donutsParats.contains(sala)) {
+            System.out.println("Hi ha un " + GREEN + "donut" + RESET + " a terra fent d'esquer.");
+        }
+        if (!sala.objectesPresents.isEmpty()) {
+            String llista = "";
+            for (int i = 0; i < sala.objectesPresents.size(); i++) {
+                llista += GREEN + sala.objectesPresents.get(i).nom + RESET + "  ";
+            }
+            System.out.println("Hi veus: " + llista);
+        }
+    }
+
+    public void agafar(String nomObjecte){
+        room sala = salaActual();
+        objecte o = sala.buscarObjecte(nomObjecte);
+        if (o == null) {
+            System.out.println("Aquí no hi ha res amb aquest nom.");
+            return;
+        }
+        if (jugador.inventariPle()) {
+            System.out.println("Tens l'inventari ple.");
+            return;
+        }
+        sala.objectesPresents.remove(o);
+        jugador.afegirObjecte(o);
+        System.out.println(GREEN + "  + " + o.nom + RESET);
+    }
+
+    public void deixar(String nomObjecte){
+        objecte o = jugador.treureObjecte(nomObjecte);
+        if (o == null) {
+            System.out.println("No portes res amb aquest nom.");
+            return;
+        }
+        salaActual().objectesPresents.add(o);
+        System.out.println(RED + "  - " + o.nom + RESET);
     }
 
     public void comprovarFinal(){
 
+    }
+
+    public static boolean skillCheck(int velocitat) {
+        int inici = (int) (Math.random() * 25); // la zona verda fa 5 caselles
+        int pos = 0;
+        int direccio = 1;
+
+        System.out.println("Prem ENTER quan el cursor estigui a la zona verda!");
+        try {
+            while (true) {
+                String barra = "";
+                for (int i = 0; i < 30; i++) {
+                    if (i == pos) barra += "|";
+                    else if (i >= inici && i < inici + 5) barra += GREEN + "=" + RESET;
+                    else barra += "-";
+                }
+                System.out.print("\r[" + barra + "]");
+
+                Thread.sleep(velocitat);
+                if (System.in.available() > 0) break; // ha premut ENTER
+
+                pos += direccio;
+                if (pos == 0 || pos == 29) direccio = -direccio;
+            }
+        } catch (Exception e) { }
+        sc.nextLine(); // treu l'ENTER
+
+        if (pos >= inici && pos < inici + 5) {
+            System.out.println(GREEN + "Perfecte!" + RESET);
+            return true;
+        }
+        System.out.println(RED + "Has fallat..." + RESET);
+        return false;
     }
 }
